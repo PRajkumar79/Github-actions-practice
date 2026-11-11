@@ -1,0 +1,32 @@
+
+name: GitHub Actions Cache Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache-practice:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Restore Cache
+        id: cache-demo
+        uses: actions/cache@v4
+        with:
+          path: cache-demo/
+          key: github-actions-practice-${{ runner.os }}-v1
+
+      - name: Check Cache Status
+        run: |
+          echo "Cache hit: ${{ steps.cache-demo.outputs.cache-hit }}"
+
+      - name: Create Sample Data
+        run: |
+          mkdir -p cache-demo
+          echo "This data is stored in GitHub cache" > cache-demo/data.txt
+
+      - name: Read Cached Data
+        run: cat cache-demo/data.txt
