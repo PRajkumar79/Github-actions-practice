@@ -1,0 +1,36 @@
+
+name: Parallel and Sequential Jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-a:
+    name: Test A
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Test A
+        run: echo "Test A completed"
+
+  test-b:
+    name: Test B
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Test B
+        run: echo "Test B completed"
+
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: [test-a, test-b]
+    steps:
+      - name: Build
+        run: echo "Build completed after both tests"
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        run: echo "Deployment completed"
