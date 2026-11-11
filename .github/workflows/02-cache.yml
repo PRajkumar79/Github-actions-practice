@@ -14,7 +14,7 @@ jobs:
 
       - name: Restore Cache
         id: cache-demo
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: cache-demo/
           key: github-actions-practice-${{ runner.os }}-v1
