@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Step 1 - Success
-        run: echo "This step is successful"
+      - name: Step 1 - failure
+        run: exit 1
 
       - name: Step 2 - Run on Success
         if: success()
